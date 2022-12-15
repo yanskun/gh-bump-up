@@ -43,7 +43,9 @@ pub fn increment_version(semantic: SemanticVersion) -> String {
     let version: Vec<&str> = tag.split(".").collect();
     assert_eq!(version.len(), 3);
 
-    let mut major = match matches!(tag.chars().next(), Some('v')) {
+    let is_prefix = matches!(tag.chars().next(), Some('v'));
+
+    let mut major = match is_prefix {
         true => version[0].trim_start_matches('v').parse::<u32>().unwrap(),
         false => version[0].parse::<u32>().unwrap(),
     };
@@ -65,5 +67,9 @@ pub fn increment_version(semantic: SemanticVersion) -> String {
         }
     }
 
-    format!("{}.{}.{}", major, minor, patch)
+    let new_version = format!("{}.{}.{}", major, minor, patch);
+    match is_prefix {
+        true => format!("v{}", new_version),
+        false => new_version,
+    }
 }
