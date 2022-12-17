@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-repo="yanskun/gh-release-up"
-exe="gh-release-up-v1.1.0"
+repo="yanskun/gh-bump-up"
+exe="gh-bump-up-v1.1.0"
 extensionPath="$(dirname "$0")"
 
 if [[ ! -x "${extensionPath}/bin/${exe}" ]]; then

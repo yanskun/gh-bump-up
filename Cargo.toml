@@ -1,5 +1,5 @@
 [package]
-name = "gh-release-up"
+name = "gh-bump-up"
 version = "0.1.0"
 edition = "2021"
 

@@ -1,4 +1,4 @@
-# gh-release-up
+# gh-bump-up
 GitHub CLI commands extension.
 
 This extension gelps create reelase tags
@@ -6,13 +6,12 @@ This extension gelps create reelase tags
 ## Install
 
 ```
-gh extension install yanskun/gh-release-up
+gh extension install yanskun/gh-bump-up
 ```
 
 ## Usage
 
 ```
 # Bump minor version
-gh release-up -m
+gh bump-up -m
 ```
-

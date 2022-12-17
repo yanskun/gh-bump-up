@@ -38,7 +38,7 @@ pub fn get_latest_tag() -> String {
     result.to_string()
 }
 
-pub fn increment_version(semantic: SemanticVersion) -> String {
+pub fn bump_version(semantic: SemanticVersion) -> String {
     let tag = get_latest_tag();
     let version: Vec<&str> = tag.split(".").collect();
     assert_eq!(version.len(), 3);

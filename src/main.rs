@@ -11,21 +11,21 @@ fn main() {
         "--help" | "-h" => {
             println!("\nMake GitHub Release Tag");
             println!("\n{}", format!("USAGE").bold());
-            println!("  gh release-up [OPTIONS]");
+            println!("  gh bump-up [OPTIONS]");
             println!("\n{}", format!("OPTIONS").bold());
             println!("  -M, --major  Bump major version");
             println!("  -m, --minor  Bump minor version");
             println!("  -p, --patch  Bump patch version");
             println!("  -h, --help   Show help");
             println!("\n{}", format!("EXAMPLES").bold());
-            println!("  $ gh release-up -M");
-            println!("  $ gh release-up -m");
-            println!("  $ gh release-up -p");
+            println!("  $ gh bump-up -M");
+            println!("  $ gh bump-up -m");
+            println!("  $ gh bump-up -p");
             return;
         }
         _ => panic!("Invalid argument"),
     };
 
-    let tag = cmd::increment_version(semantic);
+    let tag = cmd::bump_version(semantic);
     println!("{}", tag);
 }
