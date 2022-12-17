@@ -2,7 +2,7 @@
 set -e
 
 repo="yanskun/gh-release-up"
-exe="gh-release-up-v1.0.1"
+exe="gh-release-up-v1.1.0"
 extensionPath="$(dirname "$0")"
 
 if [[ ! -x "${extensionPath}/bin/${exe}" ]]; then
@@ -14,7 +14,8 @@ fi
 
 tag=$(exec "${extensionPath}/bin/${exe}" "$@")
 
-echo -e "New tag is: ${tag}\nAre you sure? [Y/n]:"
+echo -e "New tag is: $(tput bold)${tag}"
+echo -n "$(tput sgr0)Are you sure? [Y/n]:"
 read ANS
 case $ANS in
   "" | [yY]* )
