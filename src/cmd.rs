@@ -11,7 +11,6 @@ fn get_latest_tag() -> String {
     let gh_release_first = Command::new("gh")
         .arg("release")
         .arg("list")
-        .arg("--limit=1")
         .stdout(Stdio::piped())
         .spawn()
         .unwrap();
