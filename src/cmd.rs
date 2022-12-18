@@ -1,14 +1,13 @@
 use std::process::{Command, Stdio};
 use std::str;
 
-#[allow(dead_code)]
 pub enum SemanticVersion {
     Major,
     Minor,
     Patch,
 }
 
-pub fn get_latest_tag() -> String {
+fn get_latest_tag() -> String {
     let gh_release_first = Command::new("gh")
         .arg("release")
         .arg("list")
