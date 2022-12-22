@@ -14,14 +14,14 @@ fi
 
 tag=$(exec "${extensionPath}/bin/${exe}" "$@")
 
-if [ $(echo "${tag}" | wc -l) -gt 1 ]; then
+if [ "$(echo "${tag}" | wc -l)" -gt 1 ]; then
   echo "${tag}"
   exit 1
 fi
 
 echo -e "New tag is: $(tput bold)${tag}"
-echo -n "$(tput sgr0)Are you sure? [Y/n]:"
-read ANS
+read -r -p "$(tput sgr0)Are you sure? [Y/n]:"  ANS
+ANS=${ANS:-Y}
 case $ANS in
   "" | [yY]* )
     exec gh release create "${tag}" --title "${tag}"
