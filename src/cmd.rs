@@ -5,13 +5,15 @@ use std::str;
 pub fn main(s: &str) -> String {
     let v = option::get_semantic(s);
     match v {
-        Some(semantic) => bump_version(semantic),
+        Some(semantic) => {
+            let tag = get_latest_tag();
+            bump_version(tag, semantic)
+        }
         None => String::from(""),
     }
 }
 
-fn bump_version(semantic: option::SemanticVersion) -> String {
-    let tag = get_latest_tag();
+fn bump_version(tag: String, semantic: option::SemanticVersion) -> String {
     let version: Vec<&str> = tag.split(".").collect();
     assert_eq!(version.len(), 3);
 
@@ -44,6 +46,34 @@ fn bump_version(semantic: option::SemanticVersion) -> String {
         true => format!("v{}", new_version),
         false => new_version,
     }
+}
+
+#[test]
+fn test_bump_version() {
+    assert_eq!(
+        bump_version(String::from("v1.2.3"), option::SemanticVersion::Major),
+        "v2.0.0"
+    );
+    assert_eq!(
+        bump_version(String::from("v1.2.3"), option::SemanticVersion::Minor),
+        "v1.3.0"
+    );
+    assert_eq!(
+        bump_version(String::from("v1.2.3"), option::SemanticVersion::Patch),
+        "v1.2.4"
+    );
+    assert_eq!(
+        bump_version(String::from("1.2.3"), option::SemanticVersion::Major),
+        "2.0.0"
+    );
+    assert_eq!(
+        bump_version(String::from("1.2.3"), option::SemanticVersion::Minor),
+        "1.3.0"
+    );
+    assert_eq!(
+        bump_version(String::from("1.2.3"), option::SemanticVersion::Patch),
+        "1.2.4"
+    );
 }
 
 fn get_latest_tag() -> String {

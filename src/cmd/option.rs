@@ -1,5 +1,6 @@
 use colored::*;
 
+#[derive(Debug, PartialEq)]
 pub enum SemanticVersion {
     Major,
     Minor,
@@ -24,6 +25,15 @@ pub fn get_semantic(s: &str) -> Option<SemanticVersion> {
             None
         }
     }
+}
+
+#[test]
+fn test_get_semantic() {
+    assert_eq!(get_semantic("--major"), Some(SemanticVersion::Major));
+    assert_eq!(get_semantic("--minor"), Some(SemanticVersion::Minor));
+    assert_eq!(get_semantic("--patch"), Some(SemanticVersion::Patch));
+    assert_eq!(get_semantic("--help"), None);
+    assert_eq!(get_semantic("--invalid"), None);
 }
 
 fn call_help() {
