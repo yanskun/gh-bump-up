@@ -1,13 +1,16 @@
+mod option;
 use std::process::{Command, Stdio};
 use std::str;
 
-pub enum SemanticVersion {
-    Major,
-    Minor,
-    Patch,
+pub fn main(s: &str) -> String {
+    let v = option::get_semantic(s);
+    match v {
+        Some(semantic) => bump_version(semantic),
+        None => String::from(""),
+    }
 }
 
-pub fn bump_version(semantic: SemanticVersion) -> String {
+fn bump_version(semantic: option::SemanticVersion) -> String {
     let tag = get_latest_tag();
     let version: Vec<&str> = tag.split(".").collect();
     assert_eq!(version.len(), 3);
@@ -22,16 +25,16 @@ pub fn bump_version(semantic: SemanticVersion) -> String {
     let mut patch = version[2].parse::<i32>().unwrap();
 
     match semantic {
-        SemanticVersion::Major => {
+        option::SemanticVersion::Major => {
             major += 1;
             minor = 0;
             patch = 0;
         }
-        SemanticVersion::Minor => {
+        option::SemanticVersion::Minor => {
             minor += 1;
             patch = 0;
         }
-        SemanticVersion::Patch => {
+        option::SemanticVersion::Patch => {
             patch += 1;
         }
     }
