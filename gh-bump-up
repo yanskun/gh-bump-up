@@ -2,7 +2,7 @@
 set -e
 
 repo="yanskun/gh-bump-up"
-exe="gh-bump-up-v1.2.0"
+exe="gh-bump-up-v1.2.1"
 extensionPath="$(dirname "$0")"
 
 if [[ ! -x "${extensionPath}/bin/${exe}" ]]; then
